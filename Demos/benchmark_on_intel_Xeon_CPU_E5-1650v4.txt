@@ -1,0 +1,30 @@
+python 1_conversion.py
+real	0m0.246s
+user	0m0.208s
+sys	0m0.036s
+
+python 2_normalization.py
+real	0m1.282s
+user	0m3.160s
+sys	0m0.196s
+
+python 3_optimization.py
+real	10m26.947s
+user	60m31.876s
+sys	1m58.020s
+
+python 4_validation.py
+real	0m4.574s
+user	0m9.432s
+sys	0m0.668s
+
+python 5_4d_simulation.py
+real	0m50.271s
+user	0m51.176s
+sys	0m0.100s
+
+python 6_conformation.py
+real	0m0.229s
+user	0m0.780s
+sys	0m0.016s
+
