@@ -1,8 +1,11 @@
 # PHi-C
-PHi-C: deciphering Hi-C data into polymer dynamics
+
 # 1. Overview
 
-# 2. Usage
- See [Manual.pdf](https://github.com/rnakato/DROMPA3/blob/master/Manual.pdf) for detail. Please direct bug reports and questions about usage to rnakato@iam.u-tokyo.ac.jp.
+# 2. Requirements
 
-# 3. Citation
+# 3. Usage
+ python3 1_normalization.py
+
+# 4. Citation
+Shinkai, S., Nakagawa, M., Sugawara, T., Togashi, Y., Ochiai, H., Nakato, R., Taniguchi, Y. & Onami, S., PHi-C: deciphering Hi-C data into polymer dynamics.
