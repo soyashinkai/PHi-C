@@ -35,6 +35,19 @@ Move to the directory _Tutorial_:
 
     cd Tutorial
 
+Then, run the following scripts:
+
+    ./demo_run_1-2.sh
+    ./demo_run_3-4.sh
+    ./demo_run_5-6.sh
+
+It will take a few seconds, 20 minutes or less, and a few minutes, respectively.
+
+You will obtain the same output data and figures in the directory _Demos_.
+We used Hi-C data for mouse embryo stem cells (chr8: 42,100-44,525 kb; bin size: 25 kb) with KR normalization by [Bonev et al.](https://doi.org/10.1016/j.cell.2017.09.043).
+
+
+
 -------------------------
 ## Usage
 PHi-C consists of the following six Python codes:
