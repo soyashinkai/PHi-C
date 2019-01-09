@@ -70,24 +70,48 @@ Here, _NAME.txt_ as an ipunt is in sparse matrix format produced from [â€œdumpâ€
 
 A directory named _NAME_ is made, and the output _contact_matrix.txt_ is generated in the directory _NAME_.
 
+- START:
+- END:
+- RES:
+
 ### 2. Normalization of the dense contact matrix
 
     python3 2_normalization.py NAME RES OFFSET
 
+- RES: 
+- OFFSET: 
 
 ### 3. Optimization
 
     python3 3_optimization.py NAME SAMPLE ALPHA1 ALPHA2 STEP1 STEP2 ITERATION INIT_K_BACKBONE
 
-### 4. Validattion of the optimized contact matrix data 
+- SAMPLE:
+- ALPHA1:
+- ALPHA2:
+- STEP1:
+- STEP2:
+- ITERATION:
+- INIT_K_BACKBONE
+
+### 4. Validation of the optimized contact matrix data 
 
     python3 4_validation.py NAME RES SAMPLE PLT_MIN_LOG_C PLT_MAX_K_BACKBONE PLT_MAX_K PLT_K_DIS_BINS PLT_MAX_K_DIS
 
-### 5. 4D simulation of the optimal polymer model
+- PLT_MIN_LOG_C
+- PLT_MAX_K_BACKBONE
+- PLT_MAX_K
+- PLT_K_DIS_BINS
+- PLT_MAX_K_DIS
 
-    python3 5_4d_simulation.py K-file FRAME
+### 5. 4D simulation of the optimal polymer dynamics
 
-### 6. Normalize the dense contact matrix
+    python3 5_4d_simulation.py KFILE FRAME
 
-    python3 6_conformation.py K-file SAMPLE
+- KFILE:
+- FRAME:
 
+### 6. Sampling the optimal polymer conformations
+
+    python3 6_conformation.py KFILE SAMPLE
+
+- SAMPLE:
