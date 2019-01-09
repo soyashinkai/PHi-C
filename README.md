@@ -30,8 +30,12 @@ PHi-C codes require the following Python libraries:
 -------------------------
 ## Usage
 PHi-C consists of the following 6 Python codes:
--- a
-
+- 1_conversion.py
+- 2_normalization.py
+- 3_optimization.py
+- 4_validation.py
+- 5_4d_simulation.py
+- 6_conformations.py
 
 ### 1. Conversion of a sparce matrix format into a dense contact matrix
 
