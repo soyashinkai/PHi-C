@@ -2,6 +2,7 @@
 
 # Name
 NAME="Bonev_ES_observed_KR_chr8_42100-44500kb_res25kb"
+RES=25000
 
 # Hyperparameters for optimization
 ALPHA1=0.002
