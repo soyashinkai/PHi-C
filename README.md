@@ -14,11 +14,17 @@ Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 # Requirements
 
 # Usage
+
+# 1. Convert a sparce matrix format into a dense contact matrix
+
 Here, _FILENAME.txt_ as an ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
 
     python3 1_conversion.py FILENAME.txt START END RESOLUTION
 
 A directory named _FILENAME_ is made,
 and the output _contact_matrix.txt_ is generated in the directory _FILENAME_.
+
+# 2. Normalized the dense contact matrix
+
 
     python3
