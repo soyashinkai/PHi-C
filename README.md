@@ -17,6 +17,14 @@ Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 
 # Requirements
 
+PHi-C codes require the following Python libraries:
+- os
+- sys
+- numpy
+- matplotlib
+- scipy
+- numba
+
 
 -----------------
 # Usage
