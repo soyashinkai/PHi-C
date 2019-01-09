@@ -3,12 +3,6 @@
 # Name
 NAME="Bonev_ES_observed_KR_chr8_42100-44500kb_res25kb"
 
-# Parameters for conversion and normalization
-START=42100000
-END=44500000
-RES=25000
-OFFSET=2
-
 # Hyperparameters for optimization
 ALPHA1=0.002
 ALPHA2=0.0001
@@ -27,15 +21,8 @@ PLT_MAX_K=0.010
 PLT_K_DIS_BINS=100
 PLT_MAX_K_DIS=1500
 
-HiCFILE=$NAME".txt"
-#--------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------
 # Run python codes
-python 1_conversion.py $HiCFILE $START $END $RES
-
-python 2_normalization.py $NAME $RES $OFFSET
-read -p "Finished normalization!! Optimization OK? (y/N): " yn
-case "$yn" in [yY]*) ;; *) echo "abort." ; exit ;; esac
-
 python 3_optimization.py $NAME $SAMPLE $ALPHA1 $ALPHA2 $STEP1 $STEP2 $ITERATION $INIT_K_BACKBONE
 
 python 4_validation.py $NAME $RES $SAMPLE $PLT_MIN_LOG_C $PLT_MAX_K_BACKBONE $PLT_MAX_K $PLT_K_DIS_BINS $PLT_MAX_K_DIS

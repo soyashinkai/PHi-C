@@ -1,2 +1,0 @@
-sample	Cost	Correlation for logCij
-0	5.782652	0.993883
