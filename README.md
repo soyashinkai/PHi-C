@@ -14,7 +14,7 @@ Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 # Requirements
 
 # Usage
-Here, _FILENAME.txt_ as an ipunt is in sparse matrix format produced from “dump” command of [Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
+Here, _FILENAME.txt_ as an ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
 
     python3 1_conversion.py FILENAME.txt START END RESOLUTION
 
