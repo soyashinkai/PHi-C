@@ -15,7 +15,7 @@ Soya Shinkai, Masaki Nakagawa, Takeshi Sugawara, Yuichi Togashi, Hiroshi Ochiai,
 Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 **"PHi-C: deciphering Hi-C data into polymer dynamics."**
 
-# Requirements
+## Requirements on Python libraries
 
 PHi-C codes require the following Python libraries:
 - os
@@ -27,7 +27,7 @@ PHi-C codes require the following Python libraries:
 
 
 -----------------
-# Usage
+## Usage
 
 ### 1. Conversion of a sparce matrix format into a dense contact matrix
 
