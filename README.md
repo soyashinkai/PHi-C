@@ -7,7 +7,7 @@ Instead of finding optimized 3D conformations, we can obtain optimal parameters 
 Through the optimization procedure, an optimized contact matrix is reconstructed.
 Finally, we can carry out polymer dynamics simulations of the polymer network model equipped with the optimal interactions.
 
-![桜]()
+![桜](https://github.com/soyashinkai/PHi-C/blob/master/images/overview.png)
 
 ### Citation
 
