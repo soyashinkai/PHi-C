@@ -31,7 +31,7 @@ To visualize the simulated polymer dynamics and conformations, [VMD](https://www
 
 
 ## Quick Start
-Move to the directory _Tutorial_:
+Move to the directory [_Tutorial_](/Tutorial):
 
     cd Tutorial
 
@@ -46,6 +46,9 @@ It will take a few seconds, 20 minutes or less, and a few minutes, respectively.
 You will obtain the same output data and figures in the directory [_Demos_](/Demos).
 We used Hi-C data for mouse embryo stem cells (chr8: 42,100-44,525 kb; bin size: 25 kb) with KR normalization by [Bonev et al.](https://doi.org/10.1016/j.cell.2017.09.043).
 
+To visualize the simulated polymer dynamics, run VMD, firstly read _polymer_N97.psf_, and then read _dynamics_00_K.xyz_ on VMD.
+
+To visualize the sampled polymer conformations, run VMD, firstly read _polymer_N97.psf_, and then read _conformations_00_K.xyz_ on VMD.
 
 
 -------------------------
