@@ -29,6 +29,7 @@ PHi-C codes require the following Python libraries:
 
 ## Quick tutorial
 Move to the directory _Tutorial_:
+
     cd Tutorial
 
 -------------------------
