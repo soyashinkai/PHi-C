@@ -20,17 +20,18 @@ Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 ## Requirements
 
 PHi-C codes require the following Python libraries:
-- os
-- sys
-- numpy
-- matplotlib
-- scipy
-- numba
+
+-   os
+-   sys
+-   numpy
+-   matplotlib
+-   scipy
+-   numba
 
 To visualize the simulated polymer dynamics and conformations, [VMD](https://www.ks.uiuc.edu/Research/vmd/) is needed.
 
-
 ## Quick Start
+
 Move to the directory [_Tutorial_](/Tutorial):
 
     cd Tutorial
@@ -52,66 +53,69 @@ To visualize the simulated polymer dynamics, run VMD, firstly read _polymer_N97.
 
 To visualize the sampled polymer conformations, run VMD, firstly read _polymer_N97.psf_, and then read _conformations_00_K.xyz_ on VMD.
 
+* * *
 
--------------------------
 ## Usage
+
 PHi-C consists of the following six Python codes:
-- 1_conversion.py
-- 2_normalization.py
-- 3_optimization.py
-- 4_validation.py
-- 5_4d_simulation.py
-- 6_conformations.py
+
+-   1_conversion.py
+-   2_normalization.py
+-   3_optimization.py
+-   4_validation.py
+-   5_4d_simulation.py
+-   6_conformations.py
 
 ### 1. Conversion of a sparce matrix format into a dense contact matrix
+
     python3 1_conversion.py NAME.txt START END RES
 
 Here, _NAME.txt_ as an ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
 
 A directory named _NAME_ is made, and the output _contact_matrix.txt_ is generated in the directory _NAME_.
 
-- START:
-- END:
-- RES:
+-   START:
+-   END:
+-   RES:
 
 ### 2. Normalization of the dense contact matrix
 
     python3 2_normalization.py NAME RES OFFSET
 
-- RES: 
-- OFFSET: 
+-   RES:
+-   OFFSET:
 
 ### 3. Optimization
 
     python3 3_optimization.py NAME SAMPLE ALPHA1 ALPHA2 STEP1 STEP2 ITERATION INIT_K_BACKBONE
 
-- SAMPLE:
-- ALPHA1:
-- ALPHA2:
-- STEP1:
-- STEP2:
-- ITERATION:
-- INIT_K_BACKBONE
+-   SAMPLE:
+-   ALPHA1:
+-   ALPHA2:
+-   STEP1:
+-   STEP2:
+-   ITERATION:
+-   INIT_K_BACKBONE
 
-### 4. Validation of the optimized contact matrix data 
+### 4. Validation of the optimized contact matrix data
 
     python3 4_validation.py NAME RES SAMPLE PLT_MIN_LOG_C PLT_MAX_K_BACKBONE PLT_MAX_K PLT_K_DIS_BINS PLT_MAX_K_DIS
 
-- PLT_MIN_LOG_C
-- PLT_MAX_K_BACKBONE
-- PLT_MAX_K
-- PLT_K_DIS_BINS
-- PLT_MAX_K_DIS
+-   PLT_MIN_LOG_C
+-   PLT_MAX_K_BACKBONE
+-   PLT_MAX_K
+-   PLT_K_DIS_BINS
+-   PLT_MAX_K_DIS
 
 ### 5. 4D simulation of the optimal polymer dynamics
 
     python3 5_4d_simulation.py KFILE FRAME
 
-- KFILE:
-- FRAME:
+-   KFILE:
+-   FRAME:
 
 ### 6. Sampling the optimal polymer conformations
 
     python3 6_conformation.py KFILE SAMPLE
 
-- SAMPLE:
+-   SAMPLE:
