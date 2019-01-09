@@ -8,4 +8,8 @@
     python3 1_normalization.py
 
 # Citation
-Shinkai, S., Nakagawa, M., Sugawara, T., Togashi, Y., Ochiai, H., Nakato, R., Taniguchi, Y. & Onami, S., PHi-C: deciphering Hi-C data into polymer dynamics.
+Please, cite this article if you use PHi-C.
+
+Soya Shinkai, Masaki Nakagawa, Takeshi Sugawara, Yuichi Togashi, Hiroshi Ochiai,
+Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
+**"PHi-C: deciphering Hi-C data into polymer dynamics."**
