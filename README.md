@@ -1,4 +1,5 @@
 # PHi-C
+-----------------
 
 PHi-C consists of Python3 codes for deciphering Hi-C data into polymer dynamics simulation.
 The input is a contact matrix data generated from a _hic_ file through [Juicer](https://github.com/aidenlab/juicer).
@@ -12,8 +13,10 @@ Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 **"PHi-C: deciphering Hi-C data into polymer dynamics."**
 
 # Requirements
+-----------------
 
 # Usage
+-----------------
 
 ## 1. Convert a sparce matrix format into a dense contact matrix
 
