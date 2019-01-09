@@ -14,5 +14,11 @@ Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 # Requirements
 
 # Usage
+_FILENAME.txt_ is an ipunt.
 
-    python3 1_normalization.py
+    python3 1_conversion.py _FILENAME.txt_ START END RESOLUTION
+
+A directory named _FILENAME_ is made,
+and the output _contact_matrix.txt_ is generated in the directory _FILENAME_.
+
+    python3
