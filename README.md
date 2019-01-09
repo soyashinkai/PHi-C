@@ -30,7 +30,7 @@ PHi-C codes require the following Python libraries:
 To visualize the simulated polymer dynamics and conformations, [VMD](https://www.ks.uiuc.edu/Research/vmd/) is needed.
 
 
-## Quick tutorial
+## Quick Start
 Move to the directory _Tutorial_:
 
     cd Tutorial
