@@ -5,7 +5,7 @@ The input is a contact matrix data generated from a _hic_ file through [Juicer](
 PHi-C assumes that a genomic region of interest is modeled by a polymer network model including repulsive and attractive interactions between monomers.
 Instead of finding optimized 3D conformations, we can obtain optimal parameters of the polymer network model.
 Through the optimization procedure, an optimized contact matrix is reconstructed.
-Finnaly, we can carry out a polymer dynamics simulation of the polymer network model equipped with the optimal interactions.
+Finally, we can carry out polymer dynamics simulations of the polymer network model equipped with the optimal interactions.
 
 ### Citation
 
