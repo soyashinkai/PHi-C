@@ -27,6 +27,10 @@ PHi-C codes require the following Python libraries:
 - scipy
 - numba
 
+## Quick tutorial
+Move to the directory _Tutorial_:
+    cd Tutorial
+
 -------------------------
 ## Usage
 PHi-C consists of the following six Python codes:
