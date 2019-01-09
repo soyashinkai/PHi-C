@@ -29,7 +29,7 @@ PHi-C codes require the following Python libraries:
 
 -------------------------
 ## Usage
-PHi-C consists of the following 6 Python codes:
+PHi-C consists of the following six Python codes:
 - 1_conversion.py
 - 2_normalization.py
 - 3_optimization.py
@@ -42,8 +42,7 @@ PHi-C consists of the following 6 Python codes:
 
 Here, _NAME.txt_ as an ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
 
-A directory named _NAME_ is made,
-and the output _contact_matrix.txt_ is generated in the directory _NAME_.
+A directory named _NAME_ is made, and the output _contact_matrix.txt_ is generated in the directory _NAME_.
 
 ### 2. Normalization of the dense contact matrix
 
