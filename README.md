@@ -1,12 +1,11 @@
 # PHi-C
 
----------------
-Overview
+# Overview
 
-Requirements
+# Requirements
 
-Usage
+# Usage
     python3 1_normalization.py
 
-Citation
+# Citation
 Shinkai, S., Nakagawa, M., Sugawara, T., Togashi, Y., Ochiai, H., Nakato, R., Taniguchi, Y. & Onami, S., PHi-C: deciphering Hi-C data into polymer dynamics.
