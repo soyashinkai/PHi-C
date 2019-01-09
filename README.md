@@ -17,7 +17,7 @@ Soya Shinkai, Masaki Nakagawa, Takeshi Sugawara, Yuichi Togashi, Hiroshi Ochiai,
 Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 **"PHi-C: deciphering Hi-C data into polymer dynamics."**
 
-## Requirements on Python libraries
+## Requirements
 
 PHi-C codes require the following Python libraries:
 - os
@@ -26,6 +26,9 @@ PHi-C codes require the following Python libraries:
 - matplotlib
 - scipy
 - numba
+
+To visualize the simulated polymer dynamics and conformations, [VMD](https://www.ks.uiuc.edu/Research/vmd/) is needed.
+
 
 ## Quick tutorial
 Move to the directory _Tutorial_:
