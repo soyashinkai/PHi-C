@@ -38,10 +38,9 @@ PHi-C consists of the following 6 Python codes:
 - 6_conformations.py
 
 ### 1. Conversion of a sparce matrix format into a dense contact matrix
+    python3 1_conversion.py NAME.txt START END RES
 
 Here, _NAME.txt_ as an ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
-
-    python3 1_conversion.py NAME.txt START END RES
 
 A directory named _NAME_ is made,
 and the output _contact_matrix.txt_ is generated in the directory _NAME_.
