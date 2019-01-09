@@ -6,7 +6,7 @@ import sys
 argv = sys.argv
 argc = len(argv)
 if (argc != 5):
-    print("Usage: python " + argv[0] + " Hi-C-FILE START END RES")
+    print("Usage: python " + argv[0] + " sparse-Hi-C-FILE START END RES")
     exit()
 FILE_READ = argv[1]
 START = int(argv[2])
