@@ -27,9 +27,11 @@ PHi-C codes require the following Python libraries:
 - scipy
 - numba
 
-
------------------
+-------------------------
 ## Usage
+PHi-C consists of the following 6 Python codes:
+-- a
+
 
 ### 1. Conversion of a sparce matrix format into a dense contact matrix
 
