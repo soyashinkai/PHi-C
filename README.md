@@ -68,7 +68,7 @@ PHi-C consists of the following six Python codes:
 
 ### 1. Conversion of a sparce matrix format into a dense contact matrix
 
-Here, _NAME.txt_ as an ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
+Here, _NAME.txt_ as an example ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
 
     python3 1_conversion.py NAME.txt START END RES
 
