@@ -68,9 +68,11 @@ PHi-C consists of the following six Python codes:
 
 ### 1. Conversion of a sparce matrix format into a dense contact matrix
 
+Here, _NAME.txt_ as an ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
+
     python3 1_conversion.py NAME.txt START END RES
 
-Here, _NAME.txt_ as an ipunt is in sparse matrix format produced from [“dump” command of Juicebox](https://github.com/aidenlab/juicer/wiki/Data-Extraction).
+/NAME/contact_matrix.txt
 
 A directory named _NAME_ is made, and the output _contact_matrix.txt_ is generated in the directory _NAME_.
 
@@ -82,12 +84,22 @@ A directory named _NAME_ is made, and the output _contact_matrix.txt_ is generat
 
     python3 2_normalization.py NAME RES OFFSET
 
+/NAME/normalized_contact_matrix.txt  
+/NAME/normalized_Cij.svg  
+/NAME/normalized_Cij_log.svg  
+/NAME/normalized_contact_probability.txt  
+/NAME/contact_probability.svg
+
 -   RES:
 -   OFFSET:
 
 ### 3. Optimization
 
     python3 3_optimization.py NAME SAMPLE ALPHA1 ALPHA2 STEP1 STEP2 ITERATION INIT_K_BACKBONE
+
+/NAME/optimized_data/optimization.log  
+/NAME/optimized_data/_SAMPLE-INDEX_\_K.txt
+
 
 -   SAMPLE:
 -   ALPHA1:
@@ -101,6 +113,15 @@ A directory named _NAME_ is made, and the output _contact_matrix.txt_ is generat
 
     python3 4_validation.py NAME RES SAMPLE PLT_MIN_LOG_C PLT_MAX_K_BACKBONE PLT_MAX_K PLT_K_DIS_BINS PLT_MAX_K_DIS
 
+/NAME/cost_correlation.txt  
+/NAME/optimized_data/_SAMPLE-INDEX_\_C.svg  
+/NAME/optimized_data/_SAMPLE-INDEX_\_C_log.svg  
+/NAME/optimized_data/_SAMPLE-INDEX_\_contact_probabilities.svg  
+/NAME/optimized_data/_SAMPLE-INDEX_\_Correlation.svg  
+/NAME/optimized_data/_SAMPLE-INDEX_\_K.svg  
+/NAME/optimized_data/_SAMPLE-INDEX_\_K_distribution.svg  
+/NAME/optimized_data/_SAMPLE-INDEX_\_k_polymer_backbone.svg
+
 -   PLT_MIN_LOG_C
 -   PLT_MAX_K_BACKBONE
 -   PLT_MAX_K
@@ -111,11 +132,18 @@ A directory named _NAME_ is made, and the output _contact_matrix.txt_ is generat
 
     python3 5_4d_simulation.py KFILE FRAME
 
+/polymer_N*NUMBER-OF-BEADS*.psf  
+/dynamics_*INPUT-KFILE*.xyz
+
 -   KFILE:
 -   FRAME:
 
 ### 6. Sampling the optimal polymer conformations
 
     python3 6_conformation.py KFILE SAMPLE
+
+/polymer_N*NUMBER-OF-BEADS*.psf  
+/conformations_*INPUT-KFILE*.xyz
+
 
 -   SAMPLE:
