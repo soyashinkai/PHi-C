@@ -144,7 +144,7 @@ def main():
         fp.close()
         # ------------------------------------------------------------------------------------------
         plt.style.use("default")
-        plt.rcParams["font.family"] = "Arial"
+        # plt.rcParams["font.family"] = "Arial"
         plt.rcParams["font.size"] = 24
         # ------------------------------------------------------------------------------------------
         FILE_OUT = DIR_OPTIMIZATION + "/{0:02d}_Correlation.svg".format(sample)

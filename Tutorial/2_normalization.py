@@ -68,7 +68,7 @@ def Calc_Normalized_Contact_Matrix(C_interpolated, P):
 
 
 def Plot_Figs(C_normalized, P, P_normalized):
-    plt.rcParams["font.family"] = "Arial"
+    # plt.rcParams["font.family"] = "Arial"
     plt.rcParams["font.size"] = 24
     # ----------------------------------------------------------------------------------------------
     FILE_FIG = DIR + "/normalized_Cij_log.svg"
@@ -92,7 +92,7 @@ def Plot_Figs(C_normalized, P, P_normalized):
     FILE_FIG = DIR + "/contact_probabilities.svg"
     plt.figure(figsize=(6, 6))
     plt.style.use("ggplot")
-    plt.rcParams["font.family"] = "Arial"
+    # plt.rcParams["font.family"] = "Arial"
     plt.rcParams["font.size"] = 16
     plt.xscale("log")
     plt.yscale("log")
