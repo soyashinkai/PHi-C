@@ -24,6 +24,6 @@ PLT_MAX_K_DIS=1500
 
 #---------------------------------------------------------------------------------------------------
 # Run python codes
-python 3_optimization.py $NAME $SAMPLE $ALPHA1 $ALPHA2 $STEP1 $STEP2 $ITERATION $INIT_K_BACKBONE
+python3 3_optimization.py $NAME $SAMPLE $ALPHA1 $ALPHA2 $STEP1 $STEP2 $ITERATION $INIT_K_BACKBONE
 
-python 4_validation.py $NAME $RES $SAMPLE $PLT_MIN_LOG_C $PLT_MAX_K_BACKBONE $PLT_MAX_K $PLT_K_DIS_BINS $PLT_MAX_K_DIS
+python3 4_validation.py $NAME $RES $SAMPLE $PLT_MIN_LOG_C $PLT_MAX_K_BACKBONE $PLT_MAX_K $PLT_K_DIS_BINS $PLT_MAX_K_DIS

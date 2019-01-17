@@ -10,6 +10,6 @@ SAMPLE=100
 
 #---------------------------------------------------------------------------------------------------
 # Run python codes
-python 5_4d_simulation.py $KFILE $FRAME
+python3 5_4d_simulation.py $KFILE $FRAME
 
-python 6_conformation.py $KFILE $SAMPLE
+python3 6_conformation.py $KFILE $SAMPLE

@@ -12,6 +12,6 @@ OFFSET=2
 
 #---------------------------------------------------------------------------------------------------
 # Run python codes
-python 1_conversion.py $HiCFILE $START $END $RES
+python3 1_conversion.py $HiCFILE $START $END $RES
 
-python 2_normalization.py $NAME $RES $OFFSET
+python3 2_normalization.py $NAME $RES $OFFSET
