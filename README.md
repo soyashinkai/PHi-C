@@ -96,7 +96,7 @@ _/NAME/contact_probability.svg_
 The other two arguments of the command represent the followings:
 
 -   RES: the bin size or resolution of the input Hi-C data,
--   OFFSET: the offset value for ND contact probability _P(s)_ if needed.
+-   OFFSET: the offset value for ND contact probability $P(s)$ if needed.
 
 ### 3. Optimization
 
@@ -109,13 +109,13 @@ _/NAME/optimized_data/{SAMPLE-INDEX}\_K.txt_.
 
 The other seven arguments of the command represent the followings:
 
--   SAMPLE:
--   ALPHA1:
--   ALPHA2:
+-   SAMPLE: the number of samples to obtain optimized output.
+-   ALPHA1: the learning rate of the optimization for
+-   ALPHA2: the learning rate for
 -   STEP1:
 -   STEP2:
 -   ITERATION:
--   INIT_K_BACKBONE
+-   INIT_K_BACKBONE: initial values of _k<sub>i, i+1</sub>_.
 
 ### 4. Validation of the optimized contact matrix data
 
