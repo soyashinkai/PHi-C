@@ -85,7 +85,7 @@ The other three arguments of the command represent the followings:
 
     python3 2_normalization.py NAME RES OFFSET
 
-The command normalizes the Hi-C matrix data, _/NAME/contact_matrix.txt_, so that the diagonal elements satisfy _C<sub>ii</sub>_ = 1 as probability, with interpolating if needed.
+The command normalizes the Hi-C matrix data, _/NAME/contact_matrix.txt_, so that the diagonal elements satisfy _C<sub>ii</sub>_ = 1 as probability, with interpolating if needed. 
 The output five files are the followings:  
 _/NAME/normalized_contact_matrix.txt_  
 _/NAME/normalized_contact_probability.txt_  
