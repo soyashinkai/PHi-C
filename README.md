@@ -115,7 +115,7 @@ The other seven arguments of the command represent the followings:
 -   STEP1: the number of the optimization steps for _k<sub>i, i+1</sub>_,
 -   STEP2: the number of the optimization steps for _k<sub>i, j</sub>_,
 -   ITERATION: the number to iterate (STEP1 + STEP2) optimization steps,
--   INIT_K_BACKBONE: initial values of \_k<sub>i, i+1</sub>_.
+-   INIT_K_BACKBONE: initial values of _k<sub>i, i+1</sub>_.
 
 ### 4. Validation of the optimized contact matrix data
 
@@ -144,7 +144,7 @@ The other five arguments of the command represent the followings:
 
     python3 5_4d_simulation.py KFILE FRAME
 
-_./polymer_N\_{NUMBER-OF-BEADS}.psf_  
+_./polymer_N{NUMBER-OF-BEADS}.psf_  
 _./dynamics\_{INPUT-KFILE}.xyz_
 
 The other two arguments of the command represent the followings:
@@ -156,7 +156,7 @@ The other two arguments of the command represent the followings:
 
     python3 6_conformation.py KFILE SAMPLE
 
-_./polymer_N\_{NUMBER-OF-BEADS}.psf_  
+_./polymer_N{NUMBER-OF-BEADS}.psf_  
 _./conformations\_{INPUT-KFILE}.xyz_
 
 The other argument of the command represents the followings:
