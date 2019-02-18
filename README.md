@@ -72,9 +72,8 @@ Here, _NAME.txt_ as an example ipunt is in sparse matrix format produced from [â
 
     python3 1_conversion.py NAME.txt START END RES
 
+The command convert to dense matrix format data, _contact_matrix.txt_, at the newly made directory _NAME_:
 /NAME/contact_matrix.txt
-
-A directory named _NAME_ is made, and the output _contact_matrix.txt_ is generated in the directory _NAME_.
 
 -   START:
 -   END:
