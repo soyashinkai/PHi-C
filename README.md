@@ -72,12 +72,13 @@ Here, _NAME.txt_ as an example ipunt is in sparse matrix format produced from [â
 
     python3 1_conversion.py NAME.txt START END RES
 
-The command convert to dense matrix format data, _contact_matrix.txt_, at the newly made directory _NAME_:
-/NAME/contact_matrix.txt
+The command converts to dense matrix format data, _contact_matrix.txt_, at the newly made directory _NAME_:
+_/NAME/contact_matrix.txt_.
 
--   START:
--   END:
--   RES:
+The other three arguments of the command represent the followings:
+-   START: the start genomic coordinate of the input Hi-C data,
+-   END: the end genomic coordinate of the input Hi-C data,
+-   RES: the bin size or resolution of the input Hi-C data.
 
 ### 2. Normalization of the dense contact matrix
 
