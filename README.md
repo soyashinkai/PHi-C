@@ -109,7 +109,7 @@ _./NAME/optimized_data/{SAMPLE-INDEX}\_K.txt_.
 
 The other seven arguments of the command represent the followings:
 
--   SAMPLE: the number of samples to obtain optimized output.
+-   SAMPLE: the number of samples to obtain optimized output,
 -   ALPHA1: the learning rate of the optimization for _k<sub>i, i+1</sub>_,
 -   ALPHA2: the learning rate of the optimization for _k<sub>i, j</sub>_,
 -   STEP1: the number of the optimization steps for _k<sub>i, i+1</sub>_,
@@ -121,8 +121,7 @@ The other seven arguments of the command represent the followings:
 
     python3 4_validation.py NAME RES SAMPLE PLT_MIN_LOG_C PLT_MAX_K_BACKBONE PLT_MAX_K PLT_K_DIS_BINS PLT_MAX_K_DIS
 
-The command outputs
-
+The output eight files are the followings:  
 _./NAME/cost_correlation.txt_  
 _./NAME/optimized_data/{SAMPLE-INDEX}\_C.svg_  
 _./NAME/optimized_data/{SAMPLE-INDEX}\_C_log.svg_  
@@ -144,6 +143,7 @@ The other five arguments of the command represent the followings:
 
     python3 5_4d_simulation.py KFILE FRAME
 
+The output two files are the followings:  
 _./polymer_N{NUMBER-OF-BEADS}.psf_  
 _./dynamics\_{INPUT-KFILE}.xyz_
 
@@ -156,6 +156,7 @@ The other two arguments of the command represent the followings:
 
     python3 6_conformation.py KFILE SAMPLE
 
+The output two files are the followings:  
 _./polymer_N{NUMBER-OF-BEADS}.psf_  
 _./conformations\_{INPUT-KFILE}.xyz_
 
