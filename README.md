@@ -85,16 +85,15 @@ The other three arguments of the command represent the followings:
 
     python3 2_normalization.py NAME RES OFFSET
 
-The command normalizes the Hi-C matrix data, _/NAME/contact_matrix.txt_, so that the diagonal elements satisfy _C<sub>ii</sub>_ = 1 as probability with an interpolation if needed.
+The command normalizes the Hi-C matrix data, _/NAME/contact_matrix.txt_, so that the diagonal elements satisfy _C<sub>ii</sub>_ = 1 as probability, with interpolating if needed.
 The output five files are the followings:  
-_/NAME/normalized_contact_matrix.txt  
-/NAME/normalized_contact_probability.txt  
-/NAME/normalized_Cij.svg  
-/NAME/normalized_Cij_log.svg  
-/NAME/contact_probability.svg_
+_/NAME/normalized_contact_matrix.txt_  
+_/NAME/normalized_contact_probability.txt_  
+_/NAME/normalized_Cij.svg_  
+_/NAME/normalized_Cij_log.svg_  
+_/NAME/contact_probability.svg_
 
 The other two arguments of the command represent the followings:
-
 -   RES: the bin size or resolution of the input Hi-C data,
 -   OFFSET: the offset value for ND contact probability _P(s)_ if needed.
 
@@ -103,10 +102,11 @@ The other two arguments of the command represent the followings:
     python3 3_optimization.py NAME SAMPLE ALPHA1 ALPHA2 STEP1 STEP2 ITERATION INIT_K_BACKBONE
 
 The command carries out the PHi-C optimization.
+The log data of the optimization are stored as _/NAME/optimized_data/optimization.log_.
+The optimized interaction matrix data of the polymer network model with _SAMPLE-INDEX_ are output as
+_/NAME/optimized_data/\_SAMPLE-INDEX_\_K.txt_.
 
-/NAME/optimized_data/optimization.log  
-/NAME/optimized_data/\_SAMPLE-INDEX_\_K.txt
-
+The other seven arguments of the command represent the followings:
 -   SAMPLE:
 -   ALPHA1:
 -   ALPHA2:
