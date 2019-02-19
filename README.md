@@ -163,4 +163,4 @@ _./conformations\_{INPUT-KFILE}.xyz_
 The other argument of the command represents the followings:
 
 -   KFILE: the optimized interaction matrix data of the polymer network as input,
--   SAMPLE: the number of conformations to caluclate.
+-   SAMPLE: the number of polymer conformations to caluclate.
