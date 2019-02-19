@@ -133,11 +133,11 @@ _./NAME/optimized_data/{SAMPLE-INDEX}\_k_polymer_backbone.svg_
 
 The other five arguments of the command represent the followings:
 
--   PLT_MIN_LOG_C:
--   PLT_MAX_K_BACKBONE:
--   PLT_MAX_K:
--   PLT_K_DIS_BINS:
--   PLT_MAX_K_DIS:
+-   PLT_MIN_LOG_C: the lower limit to plot _{SAMPLE-INDEX}\_C_log.svg_, _{SAMPLE-INDEX}\_contact_probabilities.svg_ and _{SAMPLE-INDEX}\_Correlation.svg_
+-   PLT_MAX_K_BACKBONE: the upper limit to plot _{SAMPLE-INDEX}\_k_polymer_backbone.svg_,
+-   PLT_MAX_K: the upper and lower limit to plot _{SAMPLE-INDEX}\_K.svg_,
+-   PLT_K_DIS_BINS: the number of the bins of _{SAMPLE-INDEX}\_K_distribution.svg_,
+-   PLT_MAX_K_DIS: the upper limit to plot _{SAMPLE-INDEX}\_K_distribution.svg_.
 
 ### 5. 4D simulation of the optimal polymer dynamics
 
@@ -149,8 +149,8 @@ _./dynamics\_{INPUT-KFILE}.xyz_
 
 The other two arguments of the command represent the followings:
 
--   KFILE:
--   FRAME:
+-   KFILE: the optimized interaction matrix data of the polymer network as input,
+-   FRAME: the number of frames to visualize simulated polymer dynamics.
 
 ### 6. Sampling the optimal polymer conformations
 
@@ -162,4 +162,5 @@ _./conformations\_{INPUT-KFILE}.xyz_
 
 The other argument of the command represents the followings:
 
--   SAMPLE:
+-   KFILE: the optimized interaction matrix data of the polymer network as input,
+-   SAMPLE: the number of conformations to caluclate.
