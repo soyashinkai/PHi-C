@@ -1,11 +1,11 @@
 # PHi-C
 
-PHi-C consists of **Python3** codes for deciphering Hi-C data into polymer dynamics simulation.
+PHi-C consists of **Python3** codes for deciphering Hi-C data into polymer dynamics simulations.
 The input is a contact matrix data generated from a _hic_ file through [Juicer](https://github.com/aidenlab/juicer).
-PHi-C assumes that a genomic region of interest is modeled by a polymer network model including repulsive and attractive interactions between monomers.
-Instead of finding optimized 3D conformations, we can obtain optimal parameters of the polymer network model.
-Through the optimization procedure, an optimized contact matrix is reconstructed.
-Finally, we can carry out polymer dynamics simulations of the polymer network model equipped with the optimal interactions.
+PHi-C assumes that a genomic region of interest at an appropriate resolution can be modeled using a polymer network model including attractive and repulsive interactions between monomers.
+Instead of finding optimized 3D conformations, we can utilize the optimization procedure to obtain optimal interaction parameters of the polymer network model.
+We can then reconstruct an optimized contact matrix.
+Finally, we can carry out polymer dynamics simulations of the polymer network model equipped with the optimal interaction parameters.
 
 ![overview](/images/overview.png)
 
