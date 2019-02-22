@@ -15,7 +15,7 @@ PLT_MIN_LOG_C = int(argv[4])
 FILE_READ = DIR + "/contact_matrix.txt"
 FILE_OUT_MATRIX = DIR + "/normalized_contact_matrix.txt"
 FILE_OUT_PROBABILITY = DIR + "/normalized_contact_probability.txt"
-FILE_LOG = DIR + "/normalization.log"
+FILE_LOG = DIR + "/interpolation.log"
 # --------------------------------------------------------------------------------------------------
 
 
