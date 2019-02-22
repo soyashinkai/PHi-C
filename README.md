@@ -83,20 +83,22 @@ The other three arguments of the command represent the followings:
 
 ### 2. Normalization of the dense contact matrix
 
-    python3 2_normalization.py NAME RES OFFSET
+    python3 2_normalization.py NAME RES OFFSET PLT_MIN_LOG_C
 
-The command normalizes the Hi-C matrix data, _./NAME/contact_matrix.txt_, so that the diagonal elements satisfy _C<sub>ii</sub>_ = 1 as probability, with interpolating if needed.  
-The output five files are the followings:  
+The command normalizes the Hi-C matrix data, _./NAME/contact_matrix.txt_, so that the diagonal elements satisfy _C<sub>ii</sub>_ = 1 as probability, with an interpolation if needed.  
+The output six files are the followings:  
 _./NAME/normalized_contact_matrix.txt_  
 _./NAME/normalized_contact_probability.txt_  
 _./NAME/normalized_Cij.svg_  
 _./NAME/normalized_Cij_log.svg_  
-_./NAME/contact_probability.svg_
+_./NAME/contact_probability.svg_  
+_./NAME/interpolation.log_
 
 The other two arguments of the command represent the followings:
 
 -   RES: the bin size or resolution of the input Hi-C data,
--   OFFSET: the offset value for ND contact probability _P(s)_ if needed.
+-   OFFSET: the offset value for ND contact probability _P(s)_ if needed,
+-   PLT_MIN_LOG_C: the lower limit to plot _./NAME/normalized_Cij_log.svg_.
 
 ### 3. Optimization
 
