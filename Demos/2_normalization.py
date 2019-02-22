@@ -4,20 +4,22 @@ import sys
 # --------------------------------------------------------------------------------------------------
 argv = sys.argv
 argc = len(argv)
-if (argc != 4):
-    print("Usage: python " + argv[0] + " DIR RES OFFSET")
+if (argc != 5):
+    print("Usage: python " + argv[0] + " DIR RES OFFSET PLT_MIN_LOG_C")
     exit()
 DIR = argv[1]
 RES = int(argv[2])
 OFFSET = float(argv[3])
+PLT_MIN_LOG_C = int(argv[4])
 # --------------------------------------------------------------------------------------------------
 FILE_READ = DIR + "/contact_matrix.txt"
 FILE_OUT_MATRIX = DIR + "/normalized_contact_matrix.txt"
 FILE_OUT_PROBABILITY = DIR + "/normalized_contact_probability.txt"
+FILE_LOG = DIR + "/normalization.log"
 # --------------------------------------------------------------------------------------------------
 
 
-def Calc_Contact_Probability(C):
+def Calc_Contact_Probability(C, fp):
     N = C.shape[0]
     P = np.zeros(N)
     for n in range(0, N):
@@ -27,12 +29,12 @@ def Calc_Contact_Probability(C):
                 P[n] += C[m, m + n]
                 count += 1
             else:
-                print("C[%d, %d]\tis a 0 value element." % (m, m + n))
+                print("C[%d, %d]\tis a 0 value element." % (m, m + n), file=fp)
         if count > 0:
             P[n] /= count
         else:
             P[n] = OFFSET
-            print("Interpolated: P[n=%d] = %f" % (n, OFFSET))
+            print("Interpolated: P[n=%d] = %f" % (n, OFFSET), file=fp)
     return P
 # --------------------------------------------------------------------------------------------------
 
@@ -73,8 +75,10 @@ def Plot_Figs(C_normalized, P, P_normalized):
     # ----------------------------------------------------------------------------------------------
     FILE_FIG = DIR + "/normalized_Cij_log.svg"
     plt.figure(figsize=(8, 8))
-    plt.imshow(np.log10(C_normalized), cmap="inferno_r", clim=(-3, 0))
-    plt.colorbar(ticks=[-3, 0], shrink=0.6, orientation="horizontal")
+    plt.imshow(np.log10(C_normalized), cmap="inferno_r",
+               clim=(PLT_MIN_LOG_C, 0))
+    plt.colorbar(ticks=[PLT_MIN_LOG_C, 0],
+                 shrink=0.6, orientation="horizontal")
     plt.tick_params(labelbottom=0, labelleft=0, color="white")
     plt.tight_layout()
     plt.savefig(FILE_FIG)
@@ -112,10 +116,12 @@ def Plot_Figs(C_normalized, P, P_normalized):
 
 def main():
     C = np.loadtxt(FILE_READ)
-    P = Calc_Contact_Probability(C)
+    fp = open(FILE_LOG, "w")
+    P = Calc_Contact_Probability(C, fp)
     C_interpolated = Interpolate_Contact_Matrix(C, P)
     C_normalized = Calc_Normalized_Contact_Matrix(C_interpolated, P)
-    P_normalized = Calc_Contact_Probability(C_normalized)
+    P_normalized = Calc_Contact_Probability(C_normalized, fp)
+    fp.close()
     np.savetxt(FILE_OUT_MATRIX, C_normalized, fmt="%f")
     s = Plot_Figs(C_normalized, P, P_normalized)
     np.savetxt(FILE_OUT_PROBABILITY, np.c_[
