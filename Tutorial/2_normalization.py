@@ -10,7 +10,7 @@ if (argc != 5):
 DIR = argv[1]
 RES = int(argv[2])
 OFFSET = float(argv[3])
-PLT_MIN_LOG_C = int(argv[4])
+PLT_MIN_LOG_C = float(argv[4])
 # --------------------------------------------------------------------------------------------------
 FILE_READ = DIR + "/contact_matrix.txt"
 FILE_OUT_MATRIX = DIR + "/normalized_contact_matrix.txt"
