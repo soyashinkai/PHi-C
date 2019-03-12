@@ -9,6 +9,7 @@ Finally, we can carry out polymer dynamics simulations of the polymer network mo
 
 ![overview](/images/overview.png)
 
+<!--
 ### Citation
 
 If you use PHi-C, please cite:
@@ -16,6 +17,7 @@ If you use PHi-C, please cite:
 Soya Shinkai, Masaki Nakagawa, Takeshi Sugawara, Yuichi Togashi, Hiroshi Ochiai,
 Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 **"PHi-C: deciphering Hi-C data into polymer dynamics."**
+-->
 
 ## Requirements
 
@@ -117,7 +119,7 @@ The other seven arguments of the command represent the followings:
 -   STEP1: the number of the optimization steps for _k<sub>i, i+1</sub>_,
 -   STEP2: the number of the optimization steps for _k<sub>i, j</sub>_,
 -   ITERATION: the number to iterate (STEP1 + STEP2) optimization steps,
--   INIT_K_BACKBONE: initial values of _k<sub>i, i+1</sub>_.
+-   INIT_K_BACKBONE: initial values of \_k<sub>i, i+1</sub>_.
 
 ### 4. Validation of the optimized contact matrix data
 
@@ -137,7 +139,7 @@ The other five arguments of the command represent the followings:
 
 -   PLT_MIN_LOG_C: the lower limit to plot _{SAMPLE-INDEX}\_C_log.svg_, _{SAMPLE-INDEX}\_contact_probabilities.svg_ and _{SAMPLE-INDEX}\_Correlation.svg_
 -   PLT_MAX_K_BACKBONE: the upper limit to plot _{SAMPLE-INDEX}\_k_polymer_backbone.svg_,
--   PLT_MAX_K: the upper and lower limit to plot _{SAMPLE-INDEX}\_K.svg_,
+-   PLT_MAX_K: the upper and lower limit to plot _{SAMPLE-INDEX}\_K.svg\_,
 -   PLT_K_DIS_BINS: the number of the bins of _{SAMPLE-INDEX}\_K_distribution.svg_,
 -   PLT_MAX_K_DIS: the upper limit to plot _{SAMPLE-INDEX}\_K_distribution.svg_.
 
