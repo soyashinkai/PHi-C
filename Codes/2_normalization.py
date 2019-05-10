@@ -122,10 +122,10 @@ def main():
     C_normalized = Calc_Normalized_Contact_Matrix(C_interpolated, P)
     P_normalized = Calc_Contact_Probability(C_normalized, fp)
     fp.close()
-    np.savetxt(FILE_OUT_MATRIX, C_normalized, fmt="%f")
+    np.savetxt(FILE_OUT_MATRIX, C_normalized, fmt="%e")
     s = Plot_Figs(C_normalized, P, P_normalized)
     np.savetxt(FILE_OUT_PROBABILITY, np.c_[
-               s, P_normalized], fmt=["%d", "%f"])
+               s, P_normalized], fmt=["%d", "%e"])
 # --------------------------------------------------------------------------------------------------
 
 

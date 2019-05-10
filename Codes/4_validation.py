@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import scipy.stats
 import sys
 import numba
-# --------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 argv = sys.argv
 argc = len(argv)
 if (argc != 9):
@@ -18,7 +18,7 @@ PLT_MAX_K_BACKBONE = float(argv[5])
 PLT_MAX_K = float(argv[6])
 PLT_K_DIS_BINS = int(argv[7])
 PLT_MAX_K_DIS = int(argv[8])
-# --------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
 
 def Read_Normalized_C():
@@ -26,7 +26,7 @@ def Read_Normalized_C():
     C = np.loadtxt(FILE_READ)
     N = C.shape[0]
     return C, N
-# --------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
 
 @numba.jit
@@ -50,7 +50,7 @@ def Convert_K_into_C(K, N):
     # Σ^2 to C
     C = (1 + Sigma2)**(-1.5)
     return C
-# --------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
 
 @numba.jit
@@ -58,7 +58,7 @@ def Calc_Diff_Cost(log10_C_reconstructed, log10_C_normalized):
     Diff = log10_C_reconstructed - log10_C_normalized
     Cost = np.sqrt(np.trace(np.dot(Diff.T, Diff)))
     return Diff, Cost
-# --------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
 
 def Calc_Correlation(A, B, N):
@@ -73,7 +73,7 @@ def Calc_Correlation(A, B, N):
             n += 1
     r, p = scipy.stats.pearsonr(X, Y)
     return r, X, Y
-# --------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
 
 def Calc_Contact_Probability(C):
@@ -86,25 +86,25 @@ def Calc_Contact_Probability(C):
             count += 1
         P[n] /= count
     return P
-# --------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
 
 def main():
-    # ----------------------------------------------------------------------------------------------
-    DIR_OPTIMIZATION = DIR + "/optimized_data"
+    # -----------------------------------------------------------------------------------------------
+    DIR_OPT = DIR + "/optimized_data"
     FILE_COST = DIR + "/cost_correlation.txt"
-    # ----------------------------------------------------------------------------------------------
+    # -----------------------------------------------------------------------------------------------
     C_normalized, N = Read_Normalized_C()
     log10_C_normalized = np.log10(C_normalized)
-    # ----------------------------------------------------------------------------------------------
+    # -----------------------------------------------------------------------------------------------
     stream = open(FILE_COST, "w")
     print("sample\tCost\tCorrelation for logCij", file=stream)
     for sample in range(SAMPLE):
-        # ------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         # READ matrix K
-        FILE_READ = DIR_OPTIMIZATION + "/{0:02d}_K.txt".format(sample)
+        FILE_READ = DIR_OPT + "/iterated-sample{0:02d}_K.txt".format(sample)
         K = np.loadtxt(FILE_READ)
-        # ------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         # CALC cost and correlation
         C_optimized = Convert_K_into_C(K, N)
         log10_C_optimized = np.log10(C_optimized)
@@ -112,13 +112,13 @@ def main():
         r, Optimized_log, Normalized_log = Calc_Correlation(
             log10_C_optimized, log10_C_normalized, N)
         print("%d\t%f\t%f" % (sample, Cost, r), file=stream)
-        # ------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         P_normalized = Calc_Contact_Probability(C_normalized)
         P_optimized = Calc_Contact_Probability(C_optimized)
         s = np.zeros(N)
         for n in range(0, N):
             s[n] = RES * n
-        # ------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         C = np.zeros((N, N))
         for i in range(N):
             for j in range(N):
@@ -126,28 +126,29 @@ def main():
                     C[i, j] = C_optimized[i, j]
                 else:
                     C[i, j] = C_normalized[i, j]
-        # ------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         NN2 = int((N - 1) * (N - 2) / 2)
-        K_wo_BACKBONE = np.zeros(NN2)
+        K_BACKBONE = np.zeros(NN2)
         m = 0
         for i in range(0, N - 2):
             for j in range(i + 2, N):
-                K_wo_BACKBONE[m] = K[i, j]
+                K_BACKBONE[m] = K[i, j]
                 m += 1
-        # ------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         # OUTPUT K[i, i+1]
-        FILE_OUT = DIR_OPTIMIZATION + \
-            "/{0:02d}_k_polymer_backbone.txt".format(sample)
+        FILE_OUT = DIR_OPT + \
+            "/iterated-sample{0:02d}_k_polymer_backbone.txt".format(sample)
         fp = open(FILE_OUT, "w")
         for i in range(N - 1):
             print("%d\t%f" % (i, K[i, i + 1]), file=fp)
         fp.close()
-        # ------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         plt.style.use("default")
-        # plt.rcParams["font.family"] = "Arial"
+        plt.rcParams["font.family"] = "Arial"
         plt.rcParams["font.size"] = 24
-        # ------------------------------------------------------------------------------------------
-        FILE_OUT = DIR_OPTIMIZATION + "/{0:02d}_Correlation.svg".format(sample)
+        # -------------------------------------------------------------------------------------------
+        FILE_OUT = DIR_OPT + \
+            "/iterated-sample{0:02d}_Correlation.svg".format(sample)
         plt.figure(figsize=(5, 5))
         x = np.linspace(PLT_MIN_LOG_C, 0)
         plt.plot(x, x, linestyle="dashed", color="gray", linewidth=3)
@@ -159,12 +160,12 @@ def main():
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
-        # ------------------------------------------------------------------------------------------
-        FILE_READ = DIR_OPTIMIZATION + \
-            "/{0:02d}_k_polymer_backbone.txt".format(sample)
+        # -------------------------------------------------------------------------------------------
+        FILE_READ = DIR_OPT + \
+            "/iterated-sample{0:02d}_k_polymer_backbone.txt".format(sample)
         k_profile = np.loadtxt(FILE_READ)
-        FILE_OUT = DIR_OPTIMIZATION + \
-            "/{0:02d}_k_polymer_backbone.svg".format(sample)
+        FILE_OUT = DIR_OPT + \
+            "/iterated-sample{0:02d}_k_polymer_backbone.svg".format(sample)
         plt.figure(figsize=(10, 2))
         plt.bar(k_profile[:, 0], k_profile[:, 1],
                 width=1.0,
@@ -174,8 +175,8 @@ def main():
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
-        # ------------------------------------------------------------------------------------------
-        FILE_OUT = DIR_OPTIMIZATION + "/{0:02d}_C.svg".format(sample)
+        # -------------------------------------------------------------------------------------------
+        FILE_OUT = DIR_OPT + "/iterated-sample{0:02d}_C.svg".format(sample)
         plt.figure(figsize=(10, 13))
         plt.imshow(C, cmap="magma_r", clim=(0, 1))
         plt.colorbar(ticks=[0, 1], orientation="horizontal", shrink=0.6)
@@ -183,8 +184,8 @@ def main():
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
-        # ------------------------------------------------------------------------------------------
-        FILE_OUT = DIR_OPTIMIZATION + "/{0:02d}_C_log.svg".format(sample)
+        # -------------------------------------------------------------------------------------------
+        FILE_OUT = DIR_OPT + "/iterated-sample{0:02d}_C_log.svg".format(sample)
         plt.figure(figsize=(10, 13))
         plt.imshow(np.log10(C), cmap="inferno_r", clim=(PLT_MIN_LOG_C, 0))
         plt.colorbar(ticks=[PLT_MIN_LOG_C, 0],
@@ -193,8 +194,8 @@ def main():
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
-        # ------------------------------------------------------------------------------------------
-        FILE_OUT = DIR_OPTIMIZATION + "/{0:02d}_K.svg".format(sample)
+        # -------------------------------------------------------------------------------------------
+        FILE_OUT = DIR_OPT + "/iterated-sample{0:02d}_K.svg".format(sample)
         plt.figure(figsize=(10, 13))
         plt.imshow(K, cmap="bwr", clim=(-PLT_MAX_K, PLT_MAX_K))
         plt.colorbar(ticks=[-PLT_MAX_K, 0, PLT_MAX_K],
@@ -203,9 +204,9 @@ def main():
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
-        # ------------------------------------------------------------------------------------------
-        FILE_OUT = DIR_OPTIMIZATION + \
-            "/{0:02d}_contact_probabilities.svg".format(sample)
+        # -------------------------------------------------------------------------------------------
+        FILE_OUT = DIR_OPT + \
+            "/iterated-sample{0:02d}_contact_probabilities.svg".format(sample)
         plt.figure(figsize=(5, 5))
         plt.ylim(10**PLT_MIN_LOG_C, 1)
         plt.xscale("log")
@@ -216,11 +217,11 @@ def main():
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
-        # ------------------------------------------------------------------------------------------
-        FILE_OUT = DIR_OPTIMIZATION + \
-            "/{0:02d}_K_distribution.svg".format(sample)
+        # -------------------------------------------------------------------------------------------
+        FILE_OUT = DIR_OPT + \
+            "/iterated-sample{0:02d}_K_distribution.svg".format(sample)
         plt.figure(figsize=(10, 10))
-        plt.hist(K_wo_BACKBONE, bins=PLT_K_DIS_BINS,
+        plt.hist(K_BACKBONE, bins=PLT_K_DIS_BINS,
                  range=(-PLT_MAX_K, PLT_MAX_K), density=True)
         plt.xlim(-PLT_MAX_K, PLT_MAX_K)
         plt.ylim(0, PLT_MAX_K_DIS)
@@ -229,7 +230,7 @@ def main():
         plt.savefig(FILE_OUT)
         plt.close()
     stream.close()
-# --------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
 
 if __name__ == '__main__':
