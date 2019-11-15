@@ -118,7 +118,7 @@ The other seven arguments of the command represent the followings:
 -   STEP1: the number of the optimization steps for _k<sub>i, i+1</sub>_,
 -   STEP2: the number of the optimization steps for _k<sub>i, j</sub>_,
 -   ITERATION: the number to iterate (STEP1 + STEP2) optimization steps,
--   INIT_K_BACKBONE: initial values of \_k<sub>i, i+1</sub>_.
+-   INIT_K_BACKBONE: initial values of _k<sub>i, i+1</sub>_.
 
 ### 4. Validation of the optimized contact matrix data
 
