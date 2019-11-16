@@ -1,0 +1,5 @@
+
+real	20m29.924s
+user	40m35.993s
+sys	0m16.412s
+Correlation: 0.989545
