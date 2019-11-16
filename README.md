@@ -173,7 +173,25 @@ The other argument of the command represents the followings:
 
 Here we show run times to carry out the optimization procedure on our laptop PC (Intel® Core™ i7-6600U CPU, dual-core 2.60GHz).
 We used Hi-C data of mouse embryo stem cells (chr6: 50-100 Mb) by [Bonev et al.](https://doi.org/10.1016/j.cell.2017.09.043) with KR normalization, and we changed the bin size at 100-kb, 250-kb, 500-kb, and 1-Mb.
-The analyzed matrix sizes are 500x500, 200x200, 100x100, and 50x50.
+The analyzed matrix sizes were 500x500, 200x200, 100x100, and 50x50.
 We set the maximum iteration step as 700000.
 If you want to obtain more optimal output, you should tune some hyper-parameters on the optimization procedure.
-You can find the all output data at the directory [_{Benchmark_optimization}_](/Benchmark_optimization).
+You can find all output data at the directory [*Benchmark_optimization*](/Benchmark_optimization).
+We executed the followings in sequence:
+
+    ./run_3_res1000kb.sh
+    ./run_3_res500kb.sh
+    ./run_3_res250kb.sh
+    ./run_3_res100kb.sh
+
+The run times are summarized below.
+
+|          |50x50      |100x100    |200x200     |500x500      |
+|----------|-----------|-----------|------------|-------------|
+|real time |6m44.832s  |20m29.924s |81m30.485s  |701m22.306s  |
+|user time |13m15.264s |40m35.993s |161m54.515s |1366m13.786s |
+|sys time  |0m6.555s   |0m16.412s  |0m56.393s   |36m8.634s    |
+
+Besides, the cost function of our algorithm decayed to the iteration steps as shown in the following figure:
+
+![](//Benchmark_optimization/cost_decay.svg)
