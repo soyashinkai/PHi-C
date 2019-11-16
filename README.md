@@ -9,7 +9,6 @@ Finally, we can carry out polymer dynamics simulations of the polymer network mo
 
 ![overview](/images/overview.png)
 
-
 ### Citation
 
 If you use PHi-C, please cite:
@@ -17,7 +16,7 @@ If you use PHi-C, please cite:
 Soya Shinkai, Masaki Nakagawa, Takeshi Sugawara, Yuichi Togashi, Hiroshi Ochiai,
 Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
 **"PHi-C: deciphering Hi-C data into polymer dynamics."**
-*bioRxiv* [https://doi.org/10.1101/574962](https://doi.org/10.1101/574962) (2019).
+_bioRxiv_ <https://doi.org/10.1101/574962> (2019).
 
 ## Requirements
 
@@ -118,7 +117,7 @@ The other seven arguments of the command represent the followings:
 -   STEP1: the number of the optimization steps for _k<sub>i, i+1</sub>_,
 -   STEP2: the number of the optimization steps for _k<sub>i, j</sub>_,
 -   ITERATION: the number to iterate (STEP1 + STEP2) optimization steps,
--   INIT_K_BACKBONE: initial values of _k<sub>i, i+1</sub>_.
+-   INIT_K_BACKBONE: initial values of \_k<sub>i, i+1</sub>_.
 
 ### 4. Validation of the optimized contact matrix data
 
@@ -167,3 +166,14 @@ The other argument of the command represents the followings:
 
 -   KFILE: the optimized interaction matrix data of the polymer network as input,
 -   SAMPLE: the number of polymer conformations to caluclate.
+
+* * *
+
+## Benchmark of the optimization procedure
+
+Here we show run times to carry out the optimization procedure on our laptop PC (Intel® Core™ i7-6600U CPU, dual-core 2.60GHz).
+We used Hi-C data of mouse embryo stem cells (chr6: 50-100 Mb) by [Bonev et al.](https://doi.org/10.1016/j.cell.2017.09.043) with KR normalization, and we changed the bin size at 100-kb, 250-kb, 500-kb, and 1-Mb.
+The analyzed matrix sizes are 500x500, 200x200, 100x100, and 50x50.
+We set the maximum iteration step as 700000.
+If you want to obtain more optimal output, you should tune some hyper-parameters on the optimization procedure.
+You can find the all output data at the directory [_{Benchmark_optimization}_](/Benchmark_optimization).
