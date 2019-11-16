@@ -192,6 +192,6 @@ The run times are summarized below.
 |user time |13m15.264s |40m35.993s |161m54.515s |1366m13.786s |
 |sys time  |0m6.555s   |0m16.412s  |0m56.393s   |36m8.634s    |
 
-Besides, the cost function of our algorithm decayed to the iteration steps as shown in the following figure:
+Besides, the cost function of our algorithm decayed to the iteration steps, as shown in the following figure:
 
-![](//Benchmark_optimization/cost_decay.svg)
+![](//Benchmark_optimization/cost_decay.png)

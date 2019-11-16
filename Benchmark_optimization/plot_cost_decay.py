@@ -17,7 +17,7 @@ def main():
     plt.rcParams["font.family"] = "Arial"
     plt.rcParams["font.size"] = 24
     # ----------------------------------------------------------------------------------------------
-    FILE_FIG = "cost_decay.svg"
+    FILE_FIG = "cost_decay.png"
     plt.figure(figsize=(8, 6))
     plt.xlim(0, 7e5)
     plt.ylim(0, 220)
