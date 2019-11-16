@@ -194,4 +194,4 @@ The run times are summarized below.
 
 Besides, the cost function of our algorithm decayed to the iteration steps, as shown in the following figure:
 
-![cost_decay](//Benchmark_optimization/cost_decay.png)
+![cost_decay](/Benchmark_optimization/cost_decay.png)
