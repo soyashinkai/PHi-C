@@ -47,6 +47,7 @@ def Convert_K_into_C(K, N):
     d = np.sum(K, axis=0)
     D = np.diag(d)
     L = D - K
+    np.linalg.cholesky(L) # To check the positive-semidefinite property of the Laplacian matirx
     # Eigenvalues and eigenvectors
     lam, Q = np.linalg.eigh(L)
     inv_lam = 1 / lam   # inverse of the eigenvalues
