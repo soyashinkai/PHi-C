@@ -47,6 +47,7 @@ def Convert_K_into_C(K, N):
     d = np.sum(K, axis=0)
     D = np.diag(d)
     L = D - K
+    np.linalg.cholesky(L) # To check the positive-semidefinite property of the Laplacian matirx
     # Eigenvalues and eigenvectors
     lam, Q = np.linalg.eigh(L)
     inv_lam = 1 / lam   # inverse of the eigenvalues
@@ -91,25 +92,28 @@ def Random_Int_Pair_Different(N):
 
 
 def main():
-    DIR_OPTIMIZATION = DIR + "/optimized_data"
-    os.makedirs(DIR_OPTIMIZATION, exist_ok=True)
+    DIR_OPT = DIR + "/optimized_data"
+    os.makedirs(DIR_OPT, exist_ok=True)
     # ----------------------------------------------------------------------------------------------
     C_normalized, N = Read_Normalized_C()
     log10_C_normalized = np.log10(C_normalized)
+    K = Init_K(N)
+    C_reconstructed = Convert_K_into_C(K, N)
+    log10_C_reconstructed = np.log10(C_reconstructed)
+    Diff, Cost = Calc_Diff_Cost(log10_C_reconstructed, log10_C_normalized)
     # ----------------------------------------------------------------------------------------------
-    FILE_LOG = DIR_OPTIMIZATION + "/optimization.log"
-    fp = open(FILE_LOG, "w")
+    FILE_LOG = DIR_OPT + "/optimization.log"
+    fp_log = open(FILE_LOG, "w")
+    FILE_DECAY_COST = DIR_OPT + "/decay_cost.txt"
+    fp_decay = open(FILE_DECAY_COST, "w")
+    cnt = 0
     # ----------------------------------------------------------------------------------------------
     for sample in range(SAMPLE):
-        K = Init_K(N)
-        C_reconstructed = Convert_K_into_C(K, N)
-        log10_C_reconstructed = np.log10(C_reconstructed)
-        Diff, Cost = Calc_Diff_Cost(log10_C_reconstructed, log10_C_normalized)
-        # ------------------------------------------------------------------------------------------
         for iteration in range(ITERATION):
             # --------------------------------------------------------------------------------------
-            print("sample\titeration\tstep1\tCost\tUpdate K[i,j]", file=fp)
+            print("sample\titeration\tstep1\tCost\tUpdate K[i,j]", file=fp_log)
             for step1 in range(STEP1):
+                cnt += 1
                 tmp_K = K.copy()
 
                 i, j = Random_Int_Pair_Adjacent(N)
@@ -132,10 +136,12 @@ def main():
                     Diff = tmp_Diff.copy()
                     Cost = tmp_Cost
                     print("%d\t%d\t%04d\t%f\tK[%d,%d]" %
-                          (sample, iteration, step1, Cost, i, j), file=fp)
+                          (sample, iteration, step1, Cost, i, j), file=fp_log)
+                    print("%d\t%f" % (cnt, Cost), file=fp_decay)
             # --------------------------------------------------------------------------------------
-            print("sample\titeration\tstep2\tCost\tUpdate K[i,j]", file=fp)
+            print("sample\titeration\tstep2\tCost\tUpdate K[i,j]", file=fp_log)
             for step2 in range(STEP2):
+                cnt += 1
                 tmp_K = K.copy()
 
                 i, j = Random_Int_Pair_Different(N)
@@ -158,11 +164,14 @@ def main():
                     Diff = tmp_Diff.copy()
                     Cost = tmp_Cost
                     print("%d\t%d\t%04d\t%f\tK[%d,%d]" %
-                          (sample, iteration, step2, Cost, i, j), file=fp)
+                          (sample, iteration, step2, Cost, i, j), file=fp_log)
+                    print("%d\t%f" % (cnt, Cost), file=fp_decay)
         # ------------------------------------------------------------------------------------------
-        FILE_OUT = DIR_OPTIMIZATION + "/{0:02d}_K.txt".format(sample)
-        np.savetxt(FILE_OUT, K, fmt="%f")
-    fp.close()
+        FILE_OUT = DIR_OPT + "/iterated-sample{0:02d}_K.txt".format(sample)
+        np.savetxt(FILE_OUT, K, fmt="%e")
+    # ----------------------------------------------------------------------------------------------
+    fp_log.close()
+    fp_decay.close()
 # --------------------------------------------------------------------------------------------------
 
 
