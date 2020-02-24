@@ -42,12 +42,25 @@ def Init_K(N):
 
 
 @numba.jit
+def Check_PSD_of_L(K):
+    # K to Laplacian matrix
+    d = np.sum(K, axis=0)
+    D = np.diag(d)
+    L = D - K
+    # Eigenvalues and eigenvectors
+    lam, Q = np.linalg.eigh(L)
+    if ~np.all(lam[1:] > 0):
+        print("Error: The Laplacian matrix does not the positive-semidefiniteness!")
+        exit()
+# --------------------------------------------------------------------------------------------------
+
+
+@numba.jit
 def Convert_K_into_C(K, N):
     # K to Laplacian matrix
     d = np.sum(K, axis=0)
     D = np.diag(d)
     L = D - K
-    np.linalg.cholesky(L) # To check the positive-semidefinite property of the Laplacian matirx
     # Eigenvalues and eigenvectors
     lam, Q = np.linalg.eigh(L)
     inv_lam = 1 / lam   # inverse of the eigenvalues
@@ -138,6 +151,7 @@ def main():
                     print("%d\t%d\t%04d\t%f\tK[%d,%d]" %
                           (sample, iteration, step1, Cost, i, j), file=fp_log)
                     print("%d\t%f" % (cnt, Cost), file=fp_decay)
+                    Check_PSD_of_L(K)
             # --------------------------------------------------------------------------------------
             print("sample\titeration\tstep2\tCost\tUpdate K[i,j]", file=fp_log)
             for step2 in range(STEP2):
@@ -166,6 +180,7 @@ def main():
                     print("%d\t%d\t%04d\t%f\tK[%d,%d]" %
                           (sample, iteration, step2, Cost, i, j), file=fp_log)
                     print("%d\t%f" % (cnt, Cost), file=fp_decay)
+                    Check_PSD_of_L(K)
         # ------------------------------------------------------------------------------------------
         FILE_OUT = DIR_OPT + "/iterated-sample{0:02d}_K.txt".format(sample)
         np.savetxt(FILE_OUT, K, fmt="%e")
