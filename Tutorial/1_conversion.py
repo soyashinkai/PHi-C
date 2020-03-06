@@ -1,17 +1,14 @@
 import numpy as np
 import os
 import sys
-
 # --------------------------------------------------------------------------------------------------
 argv = sys.argv
 argc = len(argv)
-if (argc != 5):
-    print("Usage: python " + argv[0] + " sparse-Hi-C-FILE START END RES")
+if (argc != 3):
+    print("Usage: python " + argv[0] + " Hi-C-FILE RES")
     exit()
 FILE_READ = argv[1]
-START = int(argv[2])
-END = int(argv[3])
-RES = int(argv[4])
+RES = int(argv[2])
 DIR, EXT = os.path.splitext(FILE_READ)
 os.makedirs(DIR, exist_ok=True)
 FILE_OUT = DIR + "/contact_matrix.txt"
@@ -26,6 +23,9 @@ def Read_Data():
 
 
 def Convert_Data_into_Matrix(data):
+    Len = data.shape[0]
+    START = data[0, 1]
+    END = data[Len - 1, 1]
     N = int((END - START) / RES) + 1
     matrix = np.zeros((N, N))
     M = data.shape[0]

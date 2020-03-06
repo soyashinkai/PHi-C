@@ -41,7 +41,6 @@ def Init_K(N):
 # --------------------------------------------------------------------------------------------------
 
 
-@numba.jit
 def Check_PSD_of_L(K):
     # K to Laplacian matrix
     d = np.sum(K, axis=0)
@@ -50,8 +49,8 @@ def Check_PSD_of_L(K):
     # Eigenvalues and eigenvectors
     lam, Q = np.linalg.eigh(L)
     if ~np.all(lam[1:] > 0):
-        print("Error: The Laplacian matrix does not the positive-semidefiniteness!")
-        exit()
+        print("Error: The Laplacian matrix is not positive-semidefinite!")
+        sys.exit()
 # --------------------------------------------------------------------------------------------------
 
 
@@ -111,6 +110,7 @@ def main():
     C_normalized, N = Read_Normalized_C()
     log10_C_normalized = np.log10(C_normalized)
     K = Init_K(N)
+    Check_PSD_of_L(K)
     C_reconstructed = Convert_K_into_C(K, N)
     log10_C_reconstructed = np.log10(C_reconstructed)
     Diff, Cost = Calc_Diff_Cost(log10_C_reconstructed, log10_C_normalized)
@@ -149,8 +149,8 @@ def main():
                     Diff = tmp_Diff.copy()
                     Cost = tmp_Cost
                     print("%d\t%d\t%04d\t%f\tK[%d,%d]" %
-                          (sample, iteration, step1, Cost, i, j), file=fp_log)
-                    print("%d\t%f" % (cnt, Cost), file=fp_decay)
+                          (sample, iteration, step1, Cost / N, i, j), file=fp_log)
+                    print("%d\t%f" % (cnt, Cost / N), file=fp_decay)
                     Check_PSD_of_L(K)
             # --------------------------------------------------------------------------------------
             print("sample\titeration\tstep2\tCost\tUpdate K[i,j]", file=fp_log)
@@ -178,11 +178,11 @@ def main():
                     Diff = tmp_Diff.copy()
                     Cost = tmp_Cost
                     print("%d\t%d\t%04d\t%f\tK[%d,%d]" %
-                          (sample, iteration, step2, Cost, i, j), file=fp_log)
-                    print("%d\t%f" % (cnt, Cost), file=fp_decay)
+                          (sample, iteration, step2, Cost / N, i, j), file=fp_log)
+                    print("%d\t%f" % (cnt, Cost / N), file=fp_decay)
                     Check_PSD_of_L(K)
         # ------------------------------------------------------------------------------------------
-        FILE_OUT = DIR_OPT + "/iterated-sample{0:02d}_K.txt".format(sample)
+        FILE_OUT = DIR_OPT + "/{0:02d}_K.txt".format(sample)
         np.savetxt(FILE_OUT, K, fmt="%e")
     # ----------------------------------------------------------------------------------------------
     fp_log.close()

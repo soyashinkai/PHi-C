@@ -6,18 +6,19 @@ import numba
 # --------------------------------------------------------------------------------------------------
 argv = sys.argv
 argc = len(argv)
-if (argc != 9):
+if (argc != 10):
     print("Usage: python " + argv[0] +
-          " DIR RES SAMPLE PLT_MIN_LOG_C PLT_MAX_K_BACKBONE PLT_MAX_K PLT_K_DIS_BINS PLT_MAX_K_DIS")
+          " DIR RES SAMPLE PLT_MAX_LOG_C PLT_MIN_LOG_C PLT_MAX_K_BACKBONE PLT_MAX_K PLT_K_DIS_BINS PLT_MAX_K_DIS")
     exit()
 DIR = argv[1]
 RES = int(argv[2])
 SAMPLE = int(argv[3])
-PLT_MIN_LOG_C = float(argv[4])
-PLT_MAX_K_BACKBONE = float(argv[5])
-PLT_MAX_K = float(argv[6])
-PLT_K_DIS_BINS = int(argv[7])
-PLT_MAX_K_DIS = int(argv[8])
+PLT_MAX_LOG_C = float(argv[4])
+PLT_MIN_LOG_C = float(argv[5])
+PLT_MAX_K_BACKBONE = float(argv[6])
+PLT_MAX_K = float(argv[7])
+PLT_K_DIS_BINS = int(argv[8])
+PLT_MAX_K_DIS = int(argv[9])
 # --------------------------------------------------------------------------------------------------
 
 
@@ -62,15 +63,17 @@ def Calc_Diff_Cost(log10_C_reconstructed, log10_C_normalized):
 
 
 def Calc_Correlation(A, B, N):
-    NN = int(N * (N + 1) / 2)
-    X = np.zeros(NN)
-    Y = np.zeros(NN)
-    n = 0
+    list_X = []
+    list_Y = []
+    # ----------------------------------------------------------------------------------------------
     for i in range(N):
         for j in range(i, N):
-            X[n] = A[i, j]
-            Y[n] = B[i, j]
-            n += 1
+            list_X.append(A[i, j])
+            list_Y.append(B[i, j])
+    # ----------------------------------------------------------------------------------------------
+    X = np.array(list_X)
+    Y = np.array(list_Y)
+    # ----------------------------------------------------------------------------------------------
     r, p = scipy.stats.pearsonr(X, Y)
     return r, X, Y
 # --------------------------------------------------------------------------------------------------
@@ -78,13 +81,14 @@ def Calc_Correlation(A, B, N):
 
 def Calc_Contact_Probability(C):
     N = C.shape[0]
-    P = np.zeros(N)
+    P = np.zeros((N, 2))
     for n in range(0, N):
-        count = 0
+        P[n, 0] = RES * n
+        cnt = 0
         for m in range(0, N - n):
-            P[n] += C[m, m + n]
-            count += 1
-        P[n] /= count
+            P[n, 1] += C[m, m + n]
+            cnt += 1
+        P[n, 1] /= cnt
     return P
 # --------------------------------------------------------------------------------------------------
 
@@ -111,13 +115,10 @@ def main():
         Diff, Cost = Calc_Diff_Cost(log10_C_optimized, log10_C_normalized)
         r, Optimized_log, Normalized_log = Calc_Correlation(
             log10_C_optimized, log10_C_normalized, N)
-        print("%d\t%f\t%f" % (sample, Cost, r), file=stream)
+        print("%d\t%f\t%f" % (sample, Cost / N, r), file=stream)
         # ------------------------------------------------------------------------------------------
         P_normalized = Calc_Contact_Probability(C_normalized)
         P_optimized = Calc_Contact_Probability(C_optimized)
-        s = np.zeros(N)
-        for n in range(0, N):
-            s[n] = RES * n
         # ------------------------------------------------------------------------------------------
         C = np.zeros((N, N))
         for i in range(N):
@@ -127,13 +128,11 @@ def main():
                 else:
                     C[i, j] = C_normalized[i, j]
         # ------------------------------------------------------------------------------------------
-        NN2 = int((N - 1) * (N - 2) / 2)
-        K_wo_BACKBONE = np.zeros(NN2)
-        m = 0
+        list_K_wo_BACKBONE = []
         for i in range(0, N - 2):
             for j in range(i + 2, N):
-                K_wo_BACKBONE[m] = K[i, j]
-                m += 1
+                list_K_wo_BACKBONE.append(K[i, j])
+        K_wo_BACKBONE = np.array(list_K_wo_BACKBONE)
         # ------------------------------------------------------------------------------------------
         # OUTPUT K[i, i+1]
         FILE_OUT = DIR_OPTIMIZATION + \
@@ -144,18 +143,19 @@ def main():
         fp.close()
         # ------------------------------------------------------------------------------------------
         plt.style.use("default")
-        # plt.rcParams["font.family"] = "Arial"
+        plt.rcParams["font.family"] = "Arial"
         plt.rcParams["font.size"] = 24
         # ------------------------------------------------------------------------------------------
         FILE_OUT = DIR_OPTIMIZATION + "/{0:02d}_Correlation.svg".format(sample)
         plt.figure(figsize=(5, 5))
-        x = np.linspace(PLT_MIN_LOG_C, 0)
+        plt.axes().set_aspect("equal")
+        x = np.linspace(PLT_MIN_LOG_C, PLT_MAX_LOG_C)
         plt.plot(x, x, linestyle="dashed", color="gray", linewidth=3)
         plt.scatter(Optimized_log, Normalized_log, color="blue", alpha=0.5)
-        plt.xlim(PLT_MIN_LOG_C, 0.1)
-        plt.ylim(PLT_MIN_LOG_C, 0.1)
-        plt.xticks([PLT_MIN_LOG_C, PLT_MIN_LOG_C / 2, 0])
-        plt.yticks([PLT_MIN_LOG_C, PLT_MIN_LOG_C / 2, 0])
+        plt.xlim(PLT_MIN_LOG_C, PLT_MAX_LOG_C + 0.1)
+        plt.ylim(PLT_MIN_LOG_C, PLT_MAX_LOG_C + 0.1)
+        plt.xticks([PLT_MIN_LOG_C, PLT_MIN_LOG_C / 2, PLT_MAX_LOG_C])
+        plt.yticks([PLT_MIN_LOG_C, PLT_MIN_LOG_C / 2, PLT_MAX_LOG_C])
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
@@ -179,17 +179,18 @@ def main():
         plt.figure(figsize=(10, 13))
         plt.imshow(C, cmap="magma_r", clim=(0, 1))
         plt.colorbar(ticks=[0, 1], orientation="horizontal", shrink=0.6)
-        plt.tick_params(labelbottom=0, labelleft=0, color='white')
+        plt.axis("off")
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
         # ------------------------------------------------------------------------------------------
         FILE_OUT = DIR_OPTIMIZATION + "/{0:02d}_C_log.svg".format(sample)
         plt.figure(figsize=(10, 13))
-        plt.imshow(np.log10(C), cmap="inferno_r", clim=(PLT_MIN_LOG_C, 0))
-        plt.colorbar(ticks=[PLT_MIN_LOG_C, 0],
+        plt.imshow(np.log10(C), cmap="inferno_r",
+                   clim=(PLT_MIN_LOG_C, PLT_MAX_LOG_C))
+        plt.colorbar(ticks=[PLT_MIN_LOG_C, PLT_MAX_LOG_C],
                      orientation="horizontal", shrink=0.6)
-        plt.tick_params(labelbottom=0, labelleft=0, color='white')
+        plt.axis("off")
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
@@ -199,7 +200,7 @@ def main():
         plt.imshow(K, cmap="bwr", clim=(-PLT_MAX_K, PLT_MAX_K))
         plt.colorbar(ticks=[-PLT_MAX_K, 0, PLT_MAX_K],
                      orientation="horizontal", shrink=0.6)
-        plt.tick_params(labelbottom=0, labelleft=0, color='white')
+        plt.axis("off")
         plt.tight_layout()
         plt.savefig(FILE_OUT)
         plt.close()
@@ -207,11 +208,13 @@ def main():
         FILE_OUT = DIR_OPTIMIZATION + \
             "/{0:02d}_contact_probabilities.svg".format(sample)
         plt.figure(figsize=(5, 5))
-        plt.ylim(10**PLT_MIN_LOG_C, 1)
+        plt.ylim(10**PLT_MIN_LOG_C, 10**PLT_MAX_LOG_C)
         plt.xscale("log")
         plt.yscale("log")
-        plt.plot(s[1:], P_normalized[1:], label="Hi-C", linewidth=2)
-        plt.plot(s[1:], P_optimized[1:], label="Optimized", linewidth=2)
+        plt.plot(P_normalized[1:, 0], P_normalized[1:, 1],
+                 label="Hi-C", linewidth=2)
+        plt.plot(P_optimized[1:, 0], P_optimized[1:, 1],
+                 label="Optimized", linewidth=2)
         plt.legend(handlelength=1, loc="upper right", fontsize=20)
         plt.tight_layout()
         plt.savefig(FILE_OUT)
