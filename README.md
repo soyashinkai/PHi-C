@@ -14,9 +14,9 @@ Finally, we can carry out polymer dynamics simulations of the polymer network mo
 If you use PHi-C, please cite:
 
 Soya Shinkai, Masaki Nakagawa, Takeshi Sugawara, Yuichi Togashi, Hiroshi Ochiai,
-Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami.
-**"PHi-C: deciphering Hi-C data into polymer dynamics."**
-_bioRxiv_ <https://doi.org/10.1101/574962> (2019).
+Ryuichiro Nakato, Yuichi Taniguchi, and Shuichi Onami. (2020).
+**PHi-C: deciphering Hi-C data into polymer dynamics.**
+[_NAR Genomics and Bioinformatics_ **2** (2) lqaa020](https://doi.org/10.1093/nargab/lqaa020).
 
 ## Requirements
 
