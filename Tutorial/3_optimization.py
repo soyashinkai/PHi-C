@@ -5,9 +5,9 @@ import numba
 # --------------------------------------------------------------------------------------------------
 argv = sys.argv
 argc = len(argv)
-if (argc != 9):
+if (argc != 10):
     print("Usage: python " +
-          argv[0] + " DIR SAMPLE ALPHA1 ALPHA2 STEP1 STEP2 ITERATION INIT_K_BACKBONE")
+          argv[0] + " DIR SAMPLE ALPHA1 ALPHA2 STEP1 STEP2 ITERATION INIT_K_BACKBONE THREADS")
     exit()
 DIR = argv[1]
 SAMPLE = int(argv[2])
@@ -18,9 +18,12 @@ STEP1 = int(argv[5])  # for (i, i+1)
 STEP2 = int(argv[6])  # for (i, j)
 ITERATION = int(argv[7])
 INIT_K_BACKBONE = float(argv[8])
+THREADS = argv[9]
 # --------------------------------------------------------------------------------------------------
 SEED = 3939
 np.random.seed(SEED)
+os.environ["MKL_NUM_THREADS"] = THREADS
+os.environ["OMP_NUM_THREADS"] = THREADS
 # --------------------------------------------------------------------------------------------------
 
 
@@ -50,7 +53,6 @@ def Check_PSD_of_L(K):
     lam, Q = np.linalg.eigh(L)
     if ~np.all(lam[1:] > 0):
         print("Error: The Laplacian matrix is not positive-semidefinite!")
-        sys.exit()
 # --------------------------------------------------------------------------------------------------
 
 
@@ -110,7 +112,6 @@ def main():
     C_normalized, N = Read_Normalized_C()
     log10_C_normalized = np.log10(C_normalized)
     K = Init_K(N)
-    Check_PSD_of_L(K)
     C_reconstructed = Convert_K_into_C(K, N)
     log10_C_reconstructed = np.log10(C_reconstructed)
     Diff, Cost = Calc_Diff_Cost(log10_C_reconstructed, log10_C_normalized)
@@ -151,7 +152,6 @@ def main():
                     print("%d\t%d\t%04d\t%f\tK[%d,%d]" %
                           (sample, iteration, step1, Cost / N, i, j), file=fp_log)
                     print("%d\t%f" % (cnt, Cost / N), file=fp_decay)
-                    Check_PSD_of_L(K)
             # --------------------------------------------------------------------------------------
             print("sample\titeration\tstep2\tCost\tUpdate K[i,j]", file=fp_log)
             for step2 in range(STEP2):
@@ -180,8 +180,8 @@ def main():
                     print("%d\t%d\t%04d\t%f\tK[%d,%d]" %
                           (sample, iteration, step2, Cost / N, i, j), file=fp_log)
                     print("%d\t%f" % (cnt, Cost / N), file=fp_decay)
-                    Check_PSD_of_L(K)
         # ------------------------------------------------------------------------------------------
+        Check_PSD_of_L(K) # Here, check the PSD of the output Laplacian matrix
         FILE_OUT = DIR_OPT + "/{0:02d}_K.txt".format(sample)
         np.savetxt(FILE_OUT, K, fmt="%e")
     # ----------------------------------------------------------------------------------------------

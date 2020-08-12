@@ -11,6 +11,7 @@ STEP1=2000
 STEP2=5000
 ITERATION=100
 INIT_K_BACKBONE=0.3
+THREADS=1
 
 # Number of optimization sample
 SAMPLE=1
@@ -25,6 +26,6 @@ PLT_MAX_K_DIS=1500
 
 #---------------------------------------------------------------------------------------------------
 # Run python codes
-python3 3_optimization.py ${NAME} ${SAMPLE} ${ALPHA1} ${ALPHA2} ${STEP1} ${STEP2} ${ITERATION} ${INIT_K_BACKBONE}
+python3 3_optimization.py ${NAME} ${SAMPLE} ${ALPHA1} ${ALPHA2} ${STEP1} ${STEP2} ${ITERATION} ${INIT_K_BACKBONE} ${THREADS}
 
 python3 4_validation.py ${NAME} ${RES} ${SAMPLE} ${PLT_MAX_LOG_C} ${PLT_MIN_LOG_C} ${PLT_MAX_K_BACKBONE} ${PLT_MAX_K} ${PLT_K_DIS_BINS} ${PLT_MAX_K_DIS}
