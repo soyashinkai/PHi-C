@@ -103,7 +103,7 @@ The other two arguments of the command represent the followings:
 
 ### 3. Optimization
 
-    python3 3_optimization.py NAME SAMPLE ALPHA1 ALPHA2 STEP1 STEP2 ITERATION INIT_K_BACKBONE
+    python3 3_optimization.py NAME SAMPLE ALPHA1 ALPHA2 STEP1 STEP2 ITERATION INIT_K_BACKBONE THREADS
 
 The command carries out the PHi-C optimization.  
 The log data of the optimization are stored as _./NAME/optimized_data/optimization.log_.  
@@ -118,7 +118,7 @@ The other seven arguments of the command represent the followings:
 -   STEP1: the number of the optimization steps for _k<sub>i, i+1</sub>_,
 -   STEP2: the number of the optimization steps for _k<sub>i, j</sub>_,
 -   ITERATION: the number to iterate (STEP1 + STEP2) optimization steps,
--   INIT_K_BACKBONE: initial values of _k<sub>i, i+1</sub>_.
+-   INIT_K_BACKBONE: initial values of _k<sub>i, i+1</sub>_,
 -   THREADS: the number of threads.
 
 ### 4. Validation of the optimized contact matrix data
